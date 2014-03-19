@@ -70,6 +70,10 @@ fi
 curl --silent --max-time 10 --location $MAVEN_SETTINGS_URL --output .m2/settings.xml
 echo " done"
 
+for DIR in ".m2" ".maven" ; do
+  cp -r $CACHE_DIR/$DIR $BUILD_DIR/$DIR
+done
+
 # change to build dir to run maven
 cd $BUILD_DIR
 
