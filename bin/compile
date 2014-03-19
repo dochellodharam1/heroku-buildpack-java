@@ -98,6 +98,11 @@ if [ "true" == $KEEP_M2_CACHE ]; then
   done
 fi
 
+echo "-----> Copying .m2 and .maven"
+for DIR in ".m2" ".maven" ; do
+  cp -r $CACHE_DIR/$DIR $BUILD_DIR/$DIR
+done
+
 PROFILE_PATH="$BUILD_DIR/.profile.d/java.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export PATH="/app/.jdk/bin:$PATH"' >> $PROFILE_PATH
