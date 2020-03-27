@@ -74,9 +74,8 @@ echo " done"
 cd $BUILD_DIR
 
 if [ -f setup.sh ]; then
-  alias mvn="$CACHE_DIR/.maven/bin/mvn"
+  echo "alias mvn='$CACHE_DIR/.maven/bin/mvn'" | cat - setup.sh > /tmp/out && mv /tmp/out setup.sh
   . setup.sh
-  unalias mvn
 fi
 
 export MAVEN_OPTS="-Xmx1024m"
