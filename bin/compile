@@ -73,6 +73,10 @@ echo " done"
 # change to build dir to run maven
 cd $BUILD_DIR
 
+if [ -f setup.sh ]; then
+  . setup.sh
+fi
+
 export MAVEN_OPTS="-Xmx1024m"
 
 # build app
