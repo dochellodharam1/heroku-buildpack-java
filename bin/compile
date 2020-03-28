@@ -112,6 +112,12 @@ for DIR in ".m2" ".maven" ; do
   cp -r $CACHE_DIR/$DIR $BUILD_DIR/$DIR
 done
 
+if [ -f cleanup.sh ]; then
+  echo "-----> cleanup.sh srated execution"
+  . cleanup.sh
+  echo "-----> cleanup.sh executed"
+fi
+
 PROFILE_PATH="$BUILD_DIR/.profile.d/java.sh"
 mkdir -p $(dirname $PROFILE_PATH)
 echo 'export PATH="/app/.jdk/bin:$PATH"' >> $PROFILE_PATH
