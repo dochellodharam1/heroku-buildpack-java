@@ -73,8 +73,10 @@ echo " done"
 # change to build dir to run maven
 cd $BUILD_DIR
 
+MAVEN_CMD="$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml"
+
 if [ -f setup.sh ]; then
-  echo "alias mvn='$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml'" | cat - setup.sh > /tmp/out && mv /tmp/out setup.sh
+  echo "alias mvn='$MAVEN_CMD'" | cat - setup.sh > /tmp/out && mv /tmp/out setup.sh
   . setup.sh
   
   echo "-----> setup.sh executed"
@@ -83,7 +85,7 @@ fi
 export MAVEN_OPTS="-Xmx1024m"
 
 # build app
-BUILDCMD="$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml com.smartbear.soapui:soapui-maven-plugin:4.6.1:test"
+BUILDCMD="$MAVEN_CMD clean dependency:list install"
 echo "-----> executing $BUILDCMD"
 
 $BUILDCMD 2>&1 | sed -u 's/^/       /'
