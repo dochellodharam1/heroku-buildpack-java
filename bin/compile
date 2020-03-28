@@ -73,12 +73,12 @@ echo " done"
 # change to build dir to run maven
 cd $BUILD_DIR
 
-MAVEN_CMD="$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml"
+M2="$CACHE_DIR/.m2"
+MAVEN_CMD="$CACHE_DIR/.maven/bin/mvn -B -Duser.home=$BUILD_DIR -Dmaven.repo.local=$M2/repository -s $M2/settings.xml"
 
 if [ -f setup.sh ]; then
-  echo "alias mvn='$MAVEN_CMD'" | cat - setup.sh > /tmp/out && mv /tmp/out setup.sh
+  echo "-----> setup.sh srated execution"
   . setup.sh
-  
   echo "-----> setup.sh executed"
 fi
 
