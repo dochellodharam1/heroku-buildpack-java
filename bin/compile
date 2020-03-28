@@ -21,7 +21,7 @@ curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack
 
 export_env_dir $ENV_DIR
 
-KEEP_M2_CACHE="true"
+KEEP_M2_CACHE="false"
 
 if [ ! -d $CACHE_DIR ]; then
   KEEP_M2_CACHE="false"
